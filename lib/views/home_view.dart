@@ -1,0 +1,90 @@
+import 'package:flutter/material.dart';
+import 'new_kaji_view.dart';
+import 'log_kaji_view.dart';
+import 'points_graph_view.dart';
+
+/// ホーム画面：主要機能（家事登録、家事記録、ポイントグラフ）をグリッド表示
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
+  // ホーム画面で表示する機能のリスト
+  final List<_HomeFunction> functions = const [
+    _HomeFunction(title: '家事登録', icon: Icons.note_add),
+    _HomeFunction(title: '家事記録', icon: Icons.edit_calendar),
+    _HomeFunction(title: 'ポイントグラフ', icon: Icons.bar_chart),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('家事トラッカー'),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
+          itemCount: functions.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+          ),
+          itemBuilder: (context, index) {
+            final func = functions[index];
+            return GestureDetector(
+              onTap: () {
+                if (func.title == '家事登録') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const NewKajiView()),
+                  );
+                } else if (func.title == '家事記録') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const LogKajiView()),
+                  );
+                } else if (func.title == 'ポイントグラフ') {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const PointsGraphView()),
+                  );
+                }
+              },
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        func.icon,
+                        size: 50,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        func.title,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeFunction {
+  final String title;
+  final IconData icon;
+
+  const _HomeFunction({required this.title, required this.icon});
+}
