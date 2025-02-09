@@ -1,15 +1,24 @@
--- 初期ユーザーテーブルの作成例
-CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
-  total_points INTEGER DEFAULT 0
-);
-
--- 家事テーブルの作成例
+-- 家事データテーブル
 CREATE TABLE IF NOT EXISTS kajis (
   id SERIAL PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
   content TEXT,
   points INTEGER NOT NULL,
-  recorded_date TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ユーザーデータテーブル
+CREATE TABLE IF NOT EXISTS users (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  total_points INTEGER DEFAULT 0,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 家事レコードデータテーブル
+CREATE TABLE IF NOT EXISTS kaji_records (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER NOT NULL REFERENCES users(id),
+  kaji_id INTEGER NOT NULL REFERENCES kajis(id),
+  performed_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

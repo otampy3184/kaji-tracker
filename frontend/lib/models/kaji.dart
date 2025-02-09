@@ -3,14 +3,14 @@ class Kaji {
   final String title;
   final String content;
   final int points;
-  final DateTime? recordedDate;
+  final DateTime? createdAt;
 
   Kaji({
     required this.id,
     required this.title,
     required this.content,
     required this.points,
-    this.recordedDate,
+    this.createdAt,
   });
 
   factory Kaji.fromJson(Map<String, dynamic> json) {
@@ -19,7 +19,7 @@ class Kaji {
       title: json['title'],
       content: json['content'],
       points: json['points'],
-      recordedDate: json['recorded_date'] != null ? DateTime.parse(json['recorded_date']) : null,
+      createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,
     );
   }
 }
