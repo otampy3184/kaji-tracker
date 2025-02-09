@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: myuser
+  password: mypassword
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  host: 127.0.0.1
+  database: kajitracker_development
+
+test:
+  <<: *default
+  database: kajitracker_test
+
+production:
+  <<: *default
+  database: kajitracker_production
+  username: kajitracker
+  password: <%= ENV['KAJITRACKER_DATABASE_PASSWORD'] %>
