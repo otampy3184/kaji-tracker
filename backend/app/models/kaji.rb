@@ -1,0 +1,2 @@
+class Kaji < ApplicationRecord
+end
