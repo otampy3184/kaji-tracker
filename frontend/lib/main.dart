@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'views/home_view.dart';
+import 'views/login_view.dart'; // 先ほど作成したログイン画面
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const HomeView(),
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/home': (context) => const HomeView(),
+      },
     );
   }
 }
