@@ -1,2 +1,0 @@
-class Kaji < ApplicationRecord
-end
